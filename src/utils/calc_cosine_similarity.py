@@ -1,17 +1,12 @@
-import math
-
-def dot_product(v1, v2):
-    return sum(x * y for x, y in zip(v1, v2))
-
-def magnitude(v):
-    return math.sqrt(sum(x**2 for x in v))
+import numpy as np
 
 def cosine_similarity(v1, v2):
-    dot_prod = dot_product(v1, v2)
-    mag_v1 = magnitude(v1)
-    mag_v2 = magnitude(v2)
+    dot_product = np.dot(v1, v2)
+    norm_vector1 = np.linalg.norm(v1)
+    norm_vector2 = np.linalg.norm(v2)
 
-    if mag_v1 == 0 or mag_v2 == 0:
+    if norm_vector1 == 0 or norm_vector2 == 0:
         return 0  # Handle division by zero
 
-    return dot_prod / (mag_v1 * mag_v2)
+    similarity_score = dot_product / (norm_vector1 * norm_vector2)
+    return similarity_score
