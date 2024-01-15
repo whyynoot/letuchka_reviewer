@@ -15,15 +15,11 @@ from config import BOTTOM_BORDERED_FORMAT, CENTERED_HEADING_FORMAT,\
 from ..models.excel import WrittenTestExcel, WrittenTestGroup,\
         WrittenTestQuestionData,\
         WrittenTestStudentData,\
-        UpdatedTestExcel,\
-        UpdatedStudentData, RawTestQuestion, WrittenTestStudentAnswer,\
+        WrittenTestStudentAnswer,\
         WrittenTestVariantSheet,\
         WrittenTestSummarySheet
-from ..models.test import TestAnswerValue
-from ..utils.get_numbers_from_str import extract_numbers
 from ..utils.get_question_type import get_question_type
 from ..utils.get_test_info import get_test_info
-import numpy as np
 
 
 class ExcelService():
@@ -49,7 +45,8 @@ class ExcelService():
             students = []
             for i, student_row in enumerate(rows[3:]):
                 student_answers = list(map(lambda answer, mark: 
-                                           WrittenTestStudentAnswer(value=answer or None, mark=float(mark) or 0), 
+                                           WrittenTestStudentAnswer(value=answer or None, 
+                                                                    mark=float(mark)), 
                                                                                 student_row[2:-1:2],
                                                                                 student_row[3:-1:2]))
 

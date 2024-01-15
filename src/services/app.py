@@ -26,7 +26,7 @@ class App():
             self.answer_processor = TestAnswerProcessor()
         except Exception as e:
             ctypes.windll.user32.MessageBoxW(0, 
-                                         f"Произошла ошибка инициализации сервиса excel: {e}",
+                                         f"Произошла ошибка инициализации сервиса проверки ответов: {e}",
                                           "Ошибка инициализации", 
                                           0)
     
@@ -35,8 +35,9 @@ class App():
 
     def processor(self, file_path):
         try:
+            print(file_path)
             test = self.excel_service.read_written_test(file_path)
-            for j, variant in enumerate(test.variants):
+            for variant in test.variants:
                 for i, question in enumerate(variant.questions):
                     if question.type == TestAnswerType.LECTURE.value:
                         for student in variant.students:
